@@ -1,8 +1,8 @@
 [phases.setup]
-nixPkgs = ["php84", "php84Extensions.pdo", "php84Extensions.sqlite3", "php84Extensions.mbstring", "php84Extensions.xml", "php84Extensions.curl", "php84Extensions.zip"]
+nixPkgs = ["php83", "php83Extensions.pdo", "php83Extensions.sqlite3", "php83Extensions.mbstring", "php83Extensions.xml", "php83Extensions.curl", "php83Extensions.zip"]
 
 [phases.install]
-cmds = ["composer install --no-dev --optimize-autoloader"]
+cmds = ["composer update --no-dev --optimize-autoloader"]
 
 [phases.build]
 cmds = ["php artisan config:cache", "php artisan route:cache"]
