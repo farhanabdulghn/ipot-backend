@@ -11,6 +11,7 @@ use App\Models\OrderItemCustomization;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -61,7 +62,12 @@ class OrderController extends Controller
             }
         }
 
-        broadcast(new OrderStatusUpdated($order->id, 'pending'));
+        try {
+            broadcast(new OrderStatusUpdated($order->id, 'pending'));
+        } catch (\Exception $e) {
+            // WebSocket gagal, tapi order tetap sukses
+            Log::warning('Broadcast failed: ' . $e->getMessage());
+        }
 
         return response()->json([
             'message' => 'Order placed successfully',
