@@ -62,12 +62,11 @@ class OrderController extends Controller
             }
         }
 
-        try {
-            broadcast(new OrderStatusUpdated($order->id, 'pending'));
-        } catch (\Exception $e) {
-            // WebSocket gagal, tapi order tetap sukses
-            Log::warning('Broadcast failed: ' . $e->getMessage());
-        }
+        // try {
+        //     broadcast(new OrderStatusUpdated($order->id, 'pending'));
+        // } catch (\Exception $e) {
+        //     Log::warning('Broadcast failed: ' . $e->getMessage());
+        // }
 
         return response()->json([
             'message' => 'Order placed successfully',
@@ -112,7 +111,7 @@ class OrderController extends Controller
             'estimated_time' => $request->estimated_time,
         ]);
 
-        broadcast(new OrderStatusUpdated($order->id, $request->status, $request->estimated_time));
+        // broadcast(new OrderStatusUpdated($order->id, $request->status, $request->estimated_time));
 
         return response()->json([
             'message' => 'Status updated',
