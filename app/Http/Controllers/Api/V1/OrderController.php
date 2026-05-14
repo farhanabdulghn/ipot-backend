@@ -113,4 +113,15 @@ class OrderController extends Controller
             'status'  => $request->status,
         ]);
     }
+
+    public function index()
+    {
+        $orders = Order::with([
+            'table',
+            'items.menuItem',
+            'items.customizations.option',
+        ])->latest()->get();
+
+        return OrderResource::collection($orders);
+    }
 }

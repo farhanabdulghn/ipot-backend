@@ -15,4 +15,5 @@ Route::prefix('v1')->group(function () {
     Route::get('/orders/{id}', [OrderController::class, 'show']);
     Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus']);
     Route::get('/tables/{tableId}/status', [TableController::class, 'status']);
+    Route::get('/orders', [OrderController::class, 'index']);
 });
